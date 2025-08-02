@@ -1,0 +1,163 @@
+<form #Form="ngForm" (ngSubmit)="onSubmit(Form)">
+    <p>
+      <label for="officeName">اسم المكتب</label>
+      <input 
+        id="officeName" 
+        name="officeName" 
+        type="text" 
+        [(ngModel)]="service.newData.officeName" 
+        #officeName="ngModel"
+        required 
+      />
+      <span *ngIf="officeName.invalid && officeName.touched">Office Name is required.</span>
+    </p>
+
+
+
+    <div *ngFor="let d of service.newData.phoneNumbers; let i = index; trackBy: trackByFn">
+      <label for="phoneNumber{{ i }}">رقم الهاتف {{ i + 1 }}</label>
+      <input 
+        id="phoneNumber{{ i }}" 
+        name="phoneNumbers[{{ i }}]" 
+        type="text" 
+        [(ngModel)]="service.newData.phoneNumbers[i]" 
+        #phoneNumber="ngModel"
+        minlength="10" 
+        maxlength="10"
+        required
+
+      />
+      <button type="button" (click)="removePhoneNumber(i)">حذف</button>
+      <span *ngIf="phoneNumber.invalid && phoneNumber.touched">
+          Phone number must be 10 digits.
+      </span>
+  </div>
+  <button type="button" (click)="addPhoneNumber()">اضافة رقم هاتف</button>
+  
+  
+  <div *ngFor="let email of service.newData.emails; let i = index; trackBy: trackByFn">
+    <label for="email{{ i }}">البريد الالكتروني {{ i + 1 }}</label>
+    <input 
+      id="email{{ i }}" 
+      name="emails[{{ i }}]" 
+      type="email" 
+      [(ngModel)]="service.newData.emails[i]" 
+      #email="ngModel"
+      required
+    />
+    <button type="button" (click)="removeEmail(i)">حذف</button>
+</div>
+<button type="button" (click)="addEmail()">اضافة بريد الكتروني</button>
+
+    <p>
+        <label for="taxNumber">الرقم الضريبي</label>
+        <input 
+          id="taxNumber" 
+          name="taxNumber" 
+          type="text" 
+          [(ngModel)]="service.newData.taxNumber" 
+          #taxNumber="ngModel"
+          required 
+        />
+        <span *ngIf="taxNumber.invalid && taxNumber.touched">Tax Number is required.</span>
+      </p>
+
+
+      <p>
+        <label for="certifiedAccountants">عدد المحاسبين</label>
+        <input 
+          id="certifiedAccountants" 
+          name="certifiedAccountants" 
+          type="number" 
+          [(ngModel)]="service.newData.certifiedAccountants" 
+          #certifiedAccountants="ngModel"
+
+          required 
+          min="0"
+        />
+        <span *ngIf="certifiedAccountants.invalid && certifiedAccountants.touched">
+            Accountants number is required and must be a positive number.
+        </span>
+    </p>
+    
+    <p>
+        <label for="employees">عدد الموظفين</label>
+        <input 
+
+          id="employees" 
+          name="employees" 
+          type="number" 
+          [(ngModel)]="service.newData.employees" 
+          #employees="ngModel"
+
+          required 
+          min="0"
+        />
+        <span *ngIf="employees.invalid && employees.touched">
+            Employees number is required.
+        </span>
+      </p>
+
+
+      <div *ngFor="let d of service.newData.licensedAccountants; let i = index; trackBy: trackByFn">
+        <label for="licensedAccountants{{ i }}">المحاسب القانوني {{ i + 1 }}</label>
+        <input 
+          id="licensedAccountants{{ i }}" 
+          name="licensedAccountantss[{{ i }}]" 
+          type="text" 
+
+          [(ngModel)]="service.newData.licensedAccountants[i]" 
+          #licensedAccountants="ngModel"
+          required
+
+       
+
+
+        />
+        <button type="button" (click)="removelicensedAccountants(i)">حذف</button>
+        <span *ngIf="licensedAccountants.invalid && licensedAccountants.touched">
+          Licensed Accountants field is required.
+        </span>
+    </div>
+    <button type="button" (click)="addlicensedAccountants()">اضافة محاسب مالي</button>
+
+
+    <div *ngFor="let d of service.newData.licenseNumbers; let i = index; trackBy: trackByFn">
+      <label for="licenseNumbers{{ i }}">رقم الاجازة{{ i + 1 }} </label>
+      <input 
+        id="licenseNumbers{{ i }}" 
+        name="licenseNumberss[{{ i }}]" 
+        type="text" 
+        [(ngModel)]="service.newData.licenseNumbers[i]" 
+        #licenseNumbers="ngModel"
+   
+        required
+      />
+      <button type="button" (click)="removelicenseNumbers(i)">حذف</button>
+      <span *ngIf="licenseNumbers.invalid && licenseNumbers.touched">
+        license Number is required.
+      </span>
+  </div>
+  <button type="button" (click)="addlicenseNumbers()">اضافة رقم اجازة </button>
+
+
+
+      <p>
+        <label for="expectedBudgets">رقم الميزانية المتوقع</label>
+        <input 
+
+          id="expectedBudgets" 
+          name="expectedBudgets" 
+          type="number" 
+          [(ngModel)]="service.newData.expectedBudgets" 
+          #expectedBudgets="ngModel"
+
+          required 
+        />
+        <span *ngIf="expectedBudgets.invalid && expectedBudgets.touched">
+            Leave Number is required.
+        </span>
+      </p>
+    <button type="submit" [disabled]="Form.invalid">Save</button>
+  </form>
+  

@@ -1,0 +1,38 @@
+<div class="auth-container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="auth-form">
+    <h2>Create Account</h2>
+
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" [formControl]="form.controls.username"
+        placeholder="Choose a username">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" formControlName="password" placeholder="Create a password">
+    </div>
+
+    <div class="form-group">
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" formControlName="confirmPassword"
+        placeholder="Confirm your password">
+    </div>
+
+    <button type="submit" [disabled]="form.invalid" class="auth-button">Register</button>
+
+    <div class="auth-footer">
+      Already have an account? <a href="/login" class="auth-link">Log in</a>
+    </div>
+
+    <div *ngIf="userIsInvalid" class="error-message">
+      <i class="fas fa-exclamation-circle"></i> Please enter a valid username
+    </div>
+    <div *ngIf="passwordIsInvalid" class="error-message">
+      <i class="fas fa-exclamation-circle"></i> Password must be at least 6 characters
+    </div>
+    <div *ngIf="passwordMismatch" class="error-message">
+      <i class="fas fa-exclamation-circle"></i> Passwords do not match
+    </div>
+  </form>
+</div>
